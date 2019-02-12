@@ -111,6 +111,24 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Updates a person in the list.
+     *
+     * @throws PersonNotFoundException if the person to update does not exist in the list.
+     */
+    public void update(Person toUpdate) throws PersonNotFoundException {
+        if (contains(toUpdate) == false) {
+            throw new PersonNotFoundException();
+        } else {
+            for (Person p : internalList) {
+                if (p.isSamePerson(toUpdate)) {
+                    internalList.remove(p);
+                }
+            }
+            internalList.add(toUpdate);
+        }
+    }
+
+    /**
      * Removes the equivalent person from the list.
      *
      * @throws PersonNotFoundException if no such person could be found in the list.
